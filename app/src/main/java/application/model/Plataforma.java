@@ -11,7 +11,7 @@ import jakarta.persitence.OneToMany;
 import jakarta.persitence.Table;
 
 @Entity
-@Table (name = "Plataformas")
+@Table (name = "plataformas")
 public class Plataforma{
     @id
     @GeneratedValue(strategy = GerantionType.IDENTIFY)
