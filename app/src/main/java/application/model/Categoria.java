@@ -10,6 +10,9 @@ import jakarta.persitence.Id;
 import jakarta.persitence.OneToMany;
 import jakarta.persitence.Table;
 
+
+
+
 @Entity
 @Table (name = "categorias")
 public class Categoria{
