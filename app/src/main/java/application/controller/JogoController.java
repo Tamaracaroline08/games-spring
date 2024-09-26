@@ -51,7 +51,7 @@ public class JogoController {
 
         Jogo jogo = new Jogo(); // Corrigido 'new logo()' para 'new Jogo()'
         jogo.setTitulo(titulo); 
-        jogo.setCategoria(categoriaRepo.findById(idCategoria).orElseThrow(() -> new RuntimeException("Categoria não encontrada"))); // Corrigido 'idcategoria' para 'idCategoria'
+        jogo.setCategoria(categoriaRepo.findById(idCategoria).get());
 
         for (long p : idsPlataformas) { // Corrigido 'long pidsPlataformas' para 'long p : idsPlataformas'
             Optional<Plataforma> plataforma = plataformaRepo.findById(p);
@@ -68,8 +68,9 @@ public class JogoController {
     public String update(@RequestParam("id") long id, Model ui) {
         Optional<Jogo> jogo = jogoRepo.findById(id);
         if (jogo.isPresent()) {
-            ui.addAttribute("categorias", categoriaRepo.findAll());
             ui.addAttribute("jogo", jogo.get());
+
+            ui.addAttribute("categorias", categoriaRepo.findAll());
             ui.addAttribute("plataformas", plataformaRepo.findAll());
             return "jogo/update"; // Corrigido 'Jogo/update' para 'jogo/update'
         }
@@ -86,7 +87,7 @@ public class JogoController {
         Optional<Jogo> jogo = jogoRepo.findById(id);
         if (jogo.isPresent()) {
             jogo.get().setTitulo(titulo);
-            jogo.get().setCategoria(categoriaRepo.findById(idCategoria).orElseThrow(() -> new RuntimeException("Categoria não encontrada"))); // Corrigido 'idcategoria' para 'idCategoria'
+            jogo.get().setCategoria(categoriaRepo.findById(idCategoria).get());
             Set<Plataforma> updatePlataforma = new HashSet<>();
 
             for (long p : idsPlataformas) {
